@@ -25,11 +25,24 @@ app.get('/home', (req, res) => {
                 res.end();
                 client.close();
             })
-            console.log('database connected');
         }
     });
     // res.send("dbs.databases");
     // res.end();
+});
+
+app.get('/getcollections/:db_name', (req, res) => {
+    MongoClient.connect(connection_url, (error, client) => {
+        if (error) {
+            console.log('error : ', error);
+        } else {
+            const db = client.db(req.params.db_name)
+            db.listCollections().toArray().then((data) => {
+                res.send(data);
+                res.end();
+            })
+        }
+    });
 });
 
 app.listen(port, () => {

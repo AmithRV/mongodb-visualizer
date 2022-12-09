@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from '../../axios/axios';
 
 function Sidebar({ databaseList, refresh, loader }) {
+    const [collections, setCollections] = useState([]);
+
+    const getCollections = (db_name) => {
+        axios.get(`/getcollections/${db_name}`)
+            .then((response) => {
+                setCollections(response?.data);
+            })
+    }
 
     return (
         <div className='sidebar-wrap'>
@@ -21,22 +30,43 @@ function Sidebar({ databaseList, refresh, loader }) {
                     }
                 </div>
 
-                {
-                    databaseList?.map((data, index) => {
-                        return (
-                            <Accordion defaultActiveKey="0" key={index}>
-                                <Accordion.Item eventKey={index} >
-                                    <Accordion.Header>{data?.name}</Accordion.Header>
+                <Accordion defaultActiveKey="0">
+                    {
+                        databaseList?.map((data, index) => {
+                            return (
+                                <Accordion.Item
+                                    eventKey={index}
+                                    key={index}
+                                    onClick={() => {
+                                        setCollections([]);
+                                        getCollections(data?.name)
+                                    }}
+                                >
+                                    <Accordion.Header >
+                                        {data?.name}
+                                    </Accordion.Header>
+
                                     <Accordion.Body>
                                         <ul className="list-group">
-                                            <li className="list-group-item" >item</li>
+                                            {
+                                                (collections?.length > 0) ? (
+                                                    collections?.map((collection, index) => {
+                                                        return (
+                                                            <li className="list-group-item" key={index}>{collection?.name}</li>
+                                                        )
+                                                    })
+                                                ) : (
+                                                    <li className="list-group-item">.</li>
+                                                )
+                                            }
                                         </ul>
                                     </Accordion.Body>
                                 </Accordion.Item>
-                            </Accordion>
-                        )
-                    })
-                }
+
+                            )
+                        })
+                    }
+                </Accordion>
             </div>
         </div>
     )
