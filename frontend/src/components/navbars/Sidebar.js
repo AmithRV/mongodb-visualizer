@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../../axios/axios';
+import Store from '../../helper/store/store';
 
 function Sidebar({ databaseList, refresh, loader }) {
+
+    const store = useContext(Store);
+
     const [collections, setCollections] = useState([]);
 
     const getCollections = (db_name) => {
@@ -38,6 +42,7 @@ function Sidebar({ databaseList, refresh, loader }) {
                                     eventKey={index}
                                     key={index}
                                     onClick={() => {
+                                        store.setDatabaseName(data?.name)
                                         setCollections([]);
                                         getCollections(data?.name)
                                     }}
@@ -52,7 +57,15 @@ function Sidebar({ databaseList, refresh, loader }) {
                                                 (collections?.length > 0) ? (
                                                     collections?.map((collection, index) => {
                                                         return (
-                                                            <li className="list-group-item" key={index}>{collection?.name}</li>
+                                                            <li
+                                                                className="list-group-item"
+                                                                key={index}
+                                                                onClick={() => {
+                                                                    store.setCollectionName(collection?.name);
+                                                                }}
+                                                            >
+                                                                {collection?.name}
+                                                            </li>
                                                         )
                                                     })
                                                 ) : (

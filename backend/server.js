@@ -22,6 +22,7 @@ app.get('/home', (req, res) => {
             const adminDb = client.db('local').admin();
             adminDb.listDatabases((error, dbs) => {
                 res.send(dbs.databases);
+                res.status(200);
                 res.end();
                 client.close();
             })
@@ -39,7 +40,23 @@ app.get('/getcollections/:db_name', (req, res) => {
             const db = client.db(req.params.db_name)
             db.listCollections().toArray().then((data) => {
                 res.send(data);
+                res.status(200);
                 res.end();
+            })
+        }
+    });
+});
+
+app.get('/getcollection-details', (req, res) => {
+    MongoClient.connect(connection_url, (error, client) => {
+        if (error) {
+            console.log('error : ', error);
+        } else {
+            const db = client.db(req.query.database)
+            db.collection(req.query.collection).find({}).toArray().then((data) => {
+                res.send(data);
+                res.status(200);
+                res.end()
             })
         }
     });
