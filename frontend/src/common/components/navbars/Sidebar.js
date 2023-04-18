@@ -10,6 +10,7 @@ function Sidebar({ databaseList, refresh, loader }) {
     const store = useContext(Store);
 
     const [collections, setCollections] = useState([]);
+    const [collectionsLoader, setCollectionsLoader] = useState(false);
 
     return (
         <div className='sidebar-wrap'>
@@ -38,7 +39,7 @@ function Sidebar({ databaseList, refresh, loader }) {
                                     onClick={() => {
                                         store.setDatabaseName(data?.name)
                                         setCollections([]);
-                                        getCollections(data?.name,setCollections)
+                                        getCollections(data?.name, setCollections, setCollectionsLoader)
                                     }}
                                 >
                                     <Accordion.Header >
@@ -48,7 +49,7 @@ function Sidebar({ databaseList, refresh, loader }) {
                                     <Accordion.Body>
                                         <ul className="list-group">
                                             {
-                                                (collections?.length > 0) ? (
+                                                (collections?.length > 0 && collectionsLoader === false) ? (
                                                     collections?.map((collection, index) => {
                                                         return (
                                                             <li
@@ -63,7 +64,11 @@ function Sidebar({ databaseList, refresh, loader }) {
                                                         )
                                                     })
                                                 ) : (
-                                                    <li className="list-group-item">.</li>
+                                                    (collections?.length === 0 && collectionsLoader===false) ? (
+                                                        <li className="list-group-item"> NO COLLECTIONS AVAILABLE</li>
+                                                    ) : (
+                                                        <li className="list-group-item">Loading ...</li>
+                                                    )
                                                 )
                                             }
                                         </ul>
