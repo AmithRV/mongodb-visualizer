@@ -28,8 +28,6 @@ app.get('/home', (req, res) => {
             })
         }
     });
-    // res.send("dbs.databases");
-    // res.end();
 });
 
 app.get('/getcollections/:db_name', (req, res) => {
