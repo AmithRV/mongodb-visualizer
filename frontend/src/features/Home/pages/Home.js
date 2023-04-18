@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import DataTableComponent from '../../components/dataTable';
-import Layout from '../../components/layouts/Layout';
-import Store from '../../helper/store/store';
-import axios from '../../axios/axios';
+import Layout from '../../../common/components/layouts/Layout';
+import axios from '../../../common/helpers/axios/axios';
+import Store from '../../../common/store/store/store';
+
+import DataTableComponents from '../../../common/components/dataTable/index';
 
 function Home() {
 
@@ -40,7 +41,7 @@ function Home() {
                         databaseName : <span style={{ color: 'red' }}>{store.databaseName}</span>
                     </span>
                 </div>
-                <DataTableComponent
+                <DataTableComponents
                     columns={[
                         {
                             name: '',

@@ -1,0 +1,70 @@
+src/
+│
+├── common/
+│   ├── components/
+│   │   ├── Button.jsx
+│   │   ├── Input.jsx
+│   │   └── Modal.jsx
+│   ├── helpers/
+│   │   ├── api.js
+│   │   └── utils.js
+│   └── styles/
+│       ├── variables.css
+│       └── common.css
+│
+├── features/
+│   ├── Auth/
+│   │   ├── components/
+│   │   │   ├── LoginForm.jsx
+│   │   │   ├── SignupForm.jsx
+│   │   │   └── ResetPasswordForm.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── LoginPage.jsx
+│   │   │   ├── SignupPage.jsx
+│   │   │   └── ResetPasswordPage.jsx
+│   │   │
+│   │   ├── actions.js
+│   │   ├── reducers.js
+│   │   ├── selectors.js
+│   │   └── index.js
+│   │
+│   ├── Products/
+│   │   ├── components/
+│   │   │   ├── ProductCard.jsx
+│   │   │   └── ProductList.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── ProductsPage.jsx
+│   │   │   └── ProductDetailsPage.jsx
+│   │   │
+│   │   ├── actions.js
+│   │   ├── reducers.js
+│   │   ├── selectors.js
+│   │   └── index.js
+│   │
+│   ├── Dashboard/
+│   │   ├── components/
+│   │   │   ├── DashboardHeader.jsx
+│   │   │   └── Sidebar.jsx
+│   │   │	└── UserCard.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── DashboardPage.jsx
+│   │   │   └── SettingsPage.jsx
+│   │   │   └── UserProfilePage.jsx
+│   │   │
+│   │   ├── actions.js
+│   │   ├── reducers.js
+│   │   ├── selectors.js
+│   │   └── index.js
+│   │
+│   └── ...
+│
+│
+│
+├── App.js
+├── index.js
+└── styles/
+    ├── main.css
+    └── variables.css

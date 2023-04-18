@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../navbars/Header';
-import Sidebar from '../navbars/Sidebar';
-import axios from '../../axios/axios';
+
+import Header from '../../components/navbars/Header';
+import Sidebar from '../../components/navbars/Sidebar';
+import axios from '../../helpers/axios/axios';
 
 function Layout({ children }) {
 

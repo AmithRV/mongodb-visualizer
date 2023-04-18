@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from '../../axios/axios';
-import Store from '../../helper/store/store';
+
+import axios from '../../helpers/axios/axios';
+import Store from '../../store/store/store';
 
 function Sidebar({ databaseList, refresh, loader }) {
 

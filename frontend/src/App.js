@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import Store from './helper/store/store';
-import Home from './pages/home/Home';
+import Store from './common/store/store/store';
+import Home from './features/Home/pages/Home';
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
           }
         }
       >
-        <Home />
+        <Home/>
       </Store.Provider>
     </div>
   );
