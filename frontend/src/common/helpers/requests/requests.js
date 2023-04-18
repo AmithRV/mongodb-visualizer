@@ -1,5 +1,12 @@
 import axios from '../axios/axios'
 
+const getCollections = (db_name, setCollections) => {
+    axios.get(`/getcollections/${db_name}`)
+        .then((response) => {
+            setCollections(response?.data);
+        })
+}
+
 const getcollectionDetails = (collection_name, database_name, setCollectionDetails) => {
     axios.get(`/getcollection-details`, {
         params: {
@@ -12,6 +19,17 @@ const getcollectionDetails = (collection_name, database_name, setCollectionDetai
     })
 }
 
+const getDbs = (setDatabaseList, setLoader)=>{
+    axios.get('/list-dbs')
+    .then((response) => {
+        setDatabaseList(response?.data);
+        setLoader(false);
+    })
+}
+
+
 export {
-    getcollectionDetails
+    getcollectionDetails,
+    getCollections,
+    getDbs
 }

@@ -2,21 +2,14 @@ import React, { useContext, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import axios from '../../helpers/axios/axios';
 import Store from '../../store/store/store';
+import { getCollections } from '../../helpers/requests/requests';
 
 function Sidebar({ databaseList, refresh, loader }) {
 
     const store = useContext(Store);
 
     const [collections, setCollections] = useState([]);
-
-    const getCollections = (db_name) => {
-        axios.get(`/getcollections/${db_name}`)
-            .then((response) => {
-                setCollections(response?.data);
-            })
-    }
 
     return (
         <div className='sidebar-wrap'>
@@ -45,7 +38,7 @@ function Sidebar({ databaseList, refresh, loader }) {
                                     onClick={() => {
                                         store.setDatabaseName(data?.name)
                                         setCollections([]);
-                                        getCollections(data?.name)
+                                        getCollections(data?.name,setCollections)
                                     }}
                                 >
                                     <Accordion.Header >

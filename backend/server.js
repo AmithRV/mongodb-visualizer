@@ -6,6 +6,9 @@ const app = express();
 const port = 8000;
 const connection_url = 'mongodb://localhost:27017';
 
+// const connection_url = 'mongodb+srv://admin:0e03K0cG4xzoewSd@cluster0.uwzfyiw.mongodb.net/?retryWrites=true&w=majority';
+
+
 app.use(cors());
 
 app.all("/*", (req, res, next) => {
@@ -14,16 +17,20 @@ app.all("/*", (req, res, next) => {
     next();
 })
 
-app.get('/home', (req, res) => {
+app.get('/list-dbs', (req, res) => {
     MongoClient.connect(connection_url, (error, client) => {
         if (error) {
             console.log('error : ', error);
         } else {
-            const adminDb = client.db('local').admin();
-            adminDb.listDatabases((error, dbs) => {
-                res.send(dbs.databases);
-                res.status(200);
-                res.end();
+            const adminDb = client.db('admin');
+            adminDb.admin().listDatabases((error, dbs) => {
+                if(error){
+                    throw error;
+                }else{
+                    res.send(dbs.databases);
+                    res.status(200);
+                    res.end();
+                }
                 client.close();
             })
         }

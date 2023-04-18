@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Header from '../../components/navbars/Header';
 import Sidebar from '../../components/navbars/Sidebar';
-import axios from '../../helpers/axios/axios';
+import { getDbs } from '../../helpers/requests/requests';
 
 function Layout({ children }) {
 
@@ -17,11 +17,7 @@ function Layout({ children }) {
 
     useEffect(() => {
         setLoader(true);
-        axios.get('/home')
-            .then((response) => {
-                setDatabaseList(response?.data);
-                setLoader(false);
-            })
+        getDbs(setDatabaseList, setLoader);
     }, [refresh])
 
     return (
