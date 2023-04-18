@@ -11,6 +11,17 @@ function Home() {
 
     const store = useContext(Store);
 
+    const column = [
+        {
+            name: '',
+            selector: (row, index) => index + 1,
+        },
+        {
+            name: 'Title',
+            selector: row => row.name,
+        },
+    ]
+
     useEffect(() => {
         if (store.collectionName && store.databaseName) {
             getcollectionDetails(store.collectionName, store.databaseName, setCollectionDetails)
@@ -22,23 +33,16 @@ function Home() {
             <div className='details-wrap'>
                 <div className='details-header'>
                     <span>
-                        collectionName : <span style={{ color: 'red' }}>{store.collectionName}</span>
+                        collectionName : 
+                        <span style={{ color: 'red' }}>{store.collectionName}</span>
                     </span>
                     <span>
-                        databaseName : <span style={{ color: 'red' }}>{store.databaseName}</span>
+                        databaseName : 
+                        <span style={{ color: 'red' }}>{store.databaseName}</span>
                     </span>
                 </div>
                 <DataTableComponents
-                    columns={[
-                        {
-                            name: '',
-                            selector: (row, index) => index + 1,
-                        },
-                        {
-                            name: 'Title',
-                            selector: row => row.name,
-                        },
-                    ]}
+                    columns={column}
                     data={collectionDetails}
                 />
             </div>

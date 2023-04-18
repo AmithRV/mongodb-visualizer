@@ -6,11 +6,10 @@ const getcollectionDetails = (collection_name, database_name, setCollectionDetai
             database: database_name,
             collection: collection_name
         }
+    }).then((response) => {
+        console.log("collection_detalis : ", response?.data);
+        setCollectionDetails(response?.data);
     })
-        .then((response) => {
-            console.log("collection_detalis : ", response?.data);
-            setCollectionDetails(response?.data);
-        })
 }
 
 export {
