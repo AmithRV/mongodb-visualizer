@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Layout from '../../../common/components/layouts/Layout';
-import axios from '../../../common/helpers/axios/axios';
-import Store from '../../../common/store/store/store';
 
+import Layout from '../../../common/components/layouts/Layout';
+import Store from '../../../common/store/store/store';
 import DataTableComponents from '../../../common/components/dataTable/index';
+import { getcollectionDetails } from '../../../common/helpers/requests/requests';
 
 function Home() {
 
@@ -11,22 +11,9 @@ function Home() {
 
     const store = useContext(Store);
 
-    const getcollectionDetails = (collection_name, database_name) => {
-        axios.get(`/getcollection-details`, {
-            params: {
-                database: database_name,
-                collection: collection_name
-            }
-        })
-            .then((response) => {
-                console.log("collection_detalis : ", response?.data);
-                setCollectionDetails(response?.data);
-            })
-    }
-
     useEffect(() => {
         if (store.collectionName && store.databaseName) {
-            getcollectionDetails(store.collectionName, store.databaseName)
+            getcollectionDetails(store.collectionName, store.databaseName, setCollectionDetails)
         }
     }, [store.collectionName, store.databaseName])
 
