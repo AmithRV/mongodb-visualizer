@@ -93,3 +93,8 @@ body {
   justify-content: space-between;
   margin: 0px 10px;
 }
+
+.list-group-item:hover{
+  background-color:lightgray;
+  cursor: pointer;
+}

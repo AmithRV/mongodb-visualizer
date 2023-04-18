@@ -30,7 +30,6 @@ const getDbs = (setDatabaseList, setLoader) => {
         })
 }
 
-
 export {
     getcollectionDetails,
     getCollections,

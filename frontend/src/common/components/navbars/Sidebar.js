@@ -36,13 +36,15 @@ function Sidebar({ databaseList, refresh, loader }) {
                                 <Accordion.Item
                                     eventKey={index}
                                     key={index}
-                                    onClick={() => {
-                                        store.setDatabaseName(data?.name)
-                                        setCollections([]);
-                                        getCollections(data?.name, setCollections, setCollectionsLoader)
-                                    }}
+
                                 >
-                                    <Accordion.Header >
+                                    <Accordion.Header
+                                        onClick={() => {
+                                            store.setDatabaseName(data?.name)
+                                            setCollections([]);
+                                            getCollections(data?.name, setCollections, setCollectionsLoader)
+                                        }}
+                                    >
                                         {data?.name}
                                     </Accordion.Header>
 
@@ -64,7 +66,7 @@ function Sidebar({ databaseList, refresh, loader }) {
                                                         )
                                                     })
                                                 ) : (
-                                                    (collections?.length === 0 && collectionsLoader===false) ? (
+                                                    (collections?.length === 0 && collectionsLoader === false) ? (
                                                         <li className="list-group-item"> NO COLLECTIONS AVAILABLE</li>
                                                     ) : (
                                                         <li className="list-group-item">Loading ...</li>
@@ -74,7 +76,6 @@ function Sidebar({ databaseList, refresh, loader }) {
                                         </ul>
                                     </Accordion.Body>
                                 </Accordion.Item>
-
                             )
                         })
                     }
